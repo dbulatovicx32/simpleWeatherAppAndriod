@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView  temp, location, desc;
     EditText editLocation;
-    Button buttonSearch, buttonLogout;
+    Button buttonSearch;
 
     class Weather extends AsyncTask<String, Void, String>{
 

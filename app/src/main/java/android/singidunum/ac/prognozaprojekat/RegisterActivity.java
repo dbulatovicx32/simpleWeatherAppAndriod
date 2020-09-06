@@ -39,12 +39,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         buttonLogin.setOnClickListener(this);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        sacuvajPodatke();
-    }
-
     public void openLogin(){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

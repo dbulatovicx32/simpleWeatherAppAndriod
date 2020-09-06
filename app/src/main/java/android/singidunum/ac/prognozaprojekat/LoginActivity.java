@@ -84,8 +84,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void ucitajPodatke(){
-        String uMail = SharedPrefs.getInstance(this).getPrefs().getString(SHARED_PREFFERENCES_EMAIL, null);
-        String uPassword = SharedPrefs.getInstance(this).getPrefs().getString(SHARED_PREFFERENCES_PASSWORD, null);
+        SharedPreferences prefs = SharedPrefs.getInstance(this).getPrefs();
+
+        String uMail = prefs.getString(SHARED_PREFFERENCES_EMAIL, null);
+        String uPassword = prefs.getString(SHARED_PREFFERENCES_PASSWORD, null);
 
         inputEmail.setText(uMail);
         inputPassword.setText(uPassword);
