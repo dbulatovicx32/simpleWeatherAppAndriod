@@ -23,7 +23,7 @@
             android:gravity="bottom|end"
             android:paddingRight="1dp"
             android:text="°C"
-            android:textColor="@color/white"
+            android:textColor="@color/colorAccent"
             android:textSize="24sp"
             />
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-36dp"
             android:gravity="center_horizontal"
-            android:text="77"
+            android:text="5"
             android:textColor="@color/white"
             android:textSize="72sp" />
 
@@ -41,7 +41,7 @@
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="London"
+            android:text="Serbia"
             android:textColor="@color/white"
             android:textSize="36sp" />
 
@@ -50,8 +50,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Sunny"
-            android:textColor="@color/white"
+            android:text="Rainy"
+            android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
         <ImageView
@@ -68,7 +68,7 @@
 
         <EditText
             android:id="@+id/edit_location"
-            android:layout_width="250dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_weight=".75"
             android:backgroundTint="@color/white"
@@ -76,21 +76,28 @@
             android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="18sp"
-            
+
             />
 
         <Button
             android:id="@+id/buttonSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="25dp"
             android:layout_toRightOf="@id/edit_location"
+            android:backgroundTint="@color/colorAccent"
             android:onClick="search"
-            android:text="Search" />
+            android:text="Search"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/buttonSearch"
+            android:backgroundTint="@color/colorAccent"
+            android:onClick="logout"
+            android:text="logout"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 

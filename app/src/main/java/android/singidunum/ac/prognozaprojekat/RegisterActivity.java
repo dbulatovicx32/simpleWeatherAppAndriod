@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +20,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private EditText inputPassword,inputEmail;
     private Button buttonRegister, buttonLogin;
-    private TextView labelText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         inputEmail = (EditText) findViewById(R.id.inputEmail);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
-        labelText = (TextView) findViewById(R.id.labelTekst);
 
         buttonRegister.setOnClickListener(this);
         buttonLogin.setOnClickListener(this);
@@ -43,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStop() {
         super.onStop();
-
         sacuvajPodatke();
     }
 
@@ -52,16 +50,48 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         startActivity(intent);
     }
 
+    public void openWeather(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.buttonRegister:
-                sacuvajPodatke();
+                register();
                 break;
             case R.id.buttonLogin:
                 openLogin();
+                //openWeather();
                 break;
         }
+    }
+
+    private void register(){
+        String email = inputEmail.getText().toString();
+        String password = inputPassword.getText().toString();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+
+        if(email.trim().length() <= 4 && password.trim().length() <= 4){
+            Toast.makeText(getApplicationContext(),
+                    "Please enter valid username and password length.",
+                    Toast.LENGTH_LONG).show();
+        }
+        if (email.matches(emailPattern)){
+            sacuvajPodatke();
+            openLogin();
+            Toast.makeText(getApplicationContext(),
+                    "Valid email address, please log in.",
+                    Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "Invalid email address",
+                    Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void sacuvajPodatke(){

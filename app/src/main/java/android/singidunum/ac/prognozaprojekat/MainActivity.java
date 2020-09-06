@@ -2,19 +2,17 @@ package android.singidunum.ac.prognozaprojekat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView  temp, location, desc;
     EditText editLocation;
-    Button buttonSearch;
-    ImageView icon;
+    Button buttonSearch, buttonLogout;
 
     class Weather extends AsyncTask<String, Void, String>{
 
@@ -69,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         location = findViewById(R.id.location);
         desc = findViewById(R.id.weather_condition);
 
+        //lokacija koja se pretrazuje
         String lName = editLocation.getText().toString();
 
         String content;
@@ -81,37 +79,37 @@ public class MainActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(content);
             String weatherData = jsonObject.getString("weather");
             String mainTemperature = jsonObject.getString("main"); //ovako se zove u api-u main, nije ovaj ranije koriscen
-            String cName = jsonObject.getString("name");
+            String cName = jsonObject.getString("name"); //country name = c
             /*Log.i("weatherData", weatherData);*/
 
-            //Stavi data u niz
-            JSONArray array = new JSONArray(weatherData);
-
+            //uzmi opis vremena
             String main = "";
-            String temperature = "";
-
+            JSONArray array = new JSONArray(weatherData);
             for(int i=0; i<array.length(); i++){
                 JSONObject weatherPart = array.getJSONObject(i);
                 main = weatherPart.getString("main");
             }
 
-            JSONObject mainPart = new JSONObject(mainTemperature);
-            temperature = mainPart.getString("temp");
+            //uzmi temp iz main objekta, makni decimale
+            JSONObject mainTemp = new JSONObject(mainTemperature);
+            String temperature = mainTemp.getString("temp");
             if (temperature.contains(".")) {
                 temperature = temperature.substring(0,temperature.indexOf("."));
             }
-            Log.i("Temperature",temperature);
-            /*Log.i("main",main);
-            Log.i("description",description);*/
+            /*Log.i("Temperature",temperature);*/
 
             location.setText(cName);
             temp.setText(temperature);
             desc.setText(main);
 
-
         } catch (ExecutionException | InterruptedException | JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void logout(View view){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override

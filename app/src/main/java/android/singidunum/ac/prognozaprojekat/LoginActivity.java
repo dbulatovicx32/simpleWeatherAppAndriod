@@ -14,13 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private final static String SHARED_PREFFERENCES_PREFIX = "MainActivitySP";
+
     private final static String SHARED_PREFFERENCES_PASSWORD = "password";
     private final static String SHARED_PREFFERENCES_EMAIL = "email";
 
     private EditText inputPassword, inputEmail;
     private Button buttonRememberme, buttonLogin;
-    private TextView labelText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         inputEmail = (EditText) findViewById(R.id.inputEmail);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         buttonRememberme = (Button) findViewById(R.id.buttonRememberme);
-        labelText = (TextView) findViewById(R.id.labelTekst);
 
         buttonRememberme.setOnClickListener(this);
         buttonLogin.setOnClickListener(this);
@@ -61,23 +60,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void login(){
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString();
-        SharedPreferences prefs = getSharedPreferences(SHARED_PREFFERENCES_PREFIX, 0);
+
 
         if(email.trim().length() > 0 && password.trim().length() > 0) {
 
-            if (prefs.getString(SHARED_PREFFERENCES_EMAIL, null).equals(email) && prefs.getString(SHARED_PREFFERENCES_PASSWORD, null).equals(password)) {
+            if (    SharedPrefs.getInstance(this).getPrefs().getString(SHARED_PREFFERENCES_EMAIL, null).equals(email) &&
+                    SharedPrefs.getInstance(this).getPrefs().getString(SHARED_PREFFERENCES_PASSWORD, null).equals(password)
+            ){
                 openWeather();
-            }else{
-
+            } else {
                 Toast.makeText(getApplicationContext(),
                         "Password or Email incorrect.",
                         Toast.LENGTH_LONG).show();
             }
 
-        }else{
-
+        } else {
             Toast.makeText(getApplicationContext(),
-                    "Please enter username and password",
+                    "Please enter Email and Password",
                     Toast.LENGTH_LONG).show();
         }
 
@@ -85,12 +84,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void ucitajPodatke(){
-
         String uMail = SharedPrefs.getInstance(this).getPrefs().getString(SHARED_PREFFERENCES_EMAIL, null);
         String uPassword = SharedPrefs.getInstance(this).getPrefs().getString(SHARED_PREFFERENCES_PASSWORD, null);
 
         inputEmail.setText(uMail);
         inputPassword.setText(uPassword);
-
     }
 }

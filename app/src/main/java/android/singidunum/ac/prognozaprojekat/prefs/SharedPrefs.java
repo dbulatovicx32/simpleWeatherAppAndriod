@@ -14,7 +14,7 @@ public class SharedPrefs {
         prefs = context.getSharedPreferences(SHARED_PREFFERENCES_PREFIX, 0);
     }
 
-    //singleton. samo jedan sharedPrefs moze da postoji
+    //singleton.
     public static SharedPrefs getInstance(Context context) {
         if(instance == null){
             instance = new SharedPrefs(context);
